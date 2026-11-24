@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Rifflo Edge 6000 Hz</title>
+<style>body { font: 18px system-ui; margin: 3rem; } audio { display: block; margin-block: 1rem; }</style>
+<h1>Rifflo Edge 6000 Hz</h1>
+<audio controls loop src="edge-kugou-high.wav"></audio>
+<script>
+  const player = document.querySelector("audio");
+  player.volume = 1;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: "Rifflo Edge 6000 Hz",
+    artist: "Dedicated Edge verification profile",
+  });
+  navigator.mediaSession.setActionHandler("play", () => player.play());
+  navigator.mediaSession.setActionHandler("pause", () => player.pause());
+  player.addEventListener("play", () => { navigator.mediaSession.playbackState = "playing"; });
+  player.addEventListener("pause", () => { navigator.mediaSession.playbackState = "paused"; });
+  player.play().catch(error => { document.body.dataset.playError = error.message; });
+</script>
+</html>

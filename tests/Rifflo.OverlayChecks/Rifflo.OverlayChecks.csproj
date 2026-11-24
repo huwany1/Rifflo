@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>../../src/Rifflo/app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/Rifflo/Audio/AudioCaptureStatus.cs" Link="AudioCaptureStatus.cs" />
+    <Compile Include="../../src/Rifflo/Media/AudioCompetition.cs" Link="AudioCompetition.cs" />
+    <Compile Include="../../src/Rifflo/Media/PlaybackTransition.cs" Link="PlaybackTransition.cs" />
+    <Compile Include="../../src/Rifflo/Media/TrackState.cs" Link="TrackState.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/CaptionDrawing.cs" Link="CaptionDrawing.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/CaptionMarquee.cs" Link="CaptionMarquee.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/CaptionPanel.cs" Link="CaptionPanel.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/DesktopWindow.cs" Link="DesktopWindow.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/FrameTrace.cs" Link="FrameTrace.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/OverlayDragController.cs" Link="OverlayDragController.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/OverlayFrameClock.cs" Link="OverlayFrameClock.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/OverlayLayoutPanel.cs" Link="OverlayLayoutPanel.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/OverlayPlayback.cs" Link="OverlayPlayback.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/OverlayWindow.cs" Link="OverlayWindow.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/PlacementMath.cs" Link="PlacementMath.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/SpectrumAnimation.cs" Link="SpectrumAnimation.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/SpectrumPresentation.cs" Link="SpectrumPresentation.cs" />
+    <Compile Include="../../src/Rifflo/Overlay/SpectrumView.cs" Link="SpectrumView.cs" />
+    <Compile Include="../../src/Rifflo/Settings/AppSettings.cs" Link="AppSettings.cs" />
+    <Compile Include="../../src/Rifflo/Settings/SettingsStore.cs" Link="SettingsStore.cs" />
+    <None Update="KuGouSwitch.tsv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

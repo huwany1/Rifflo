@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Rifflo Edge verification</title>
+<style>body { font: 18px system-ui; margin: 3rem; } audio { display: block; margin-block: 1rem; }</style>
+<h1>Rifflo Edge verification</h1>
+<audio id="player" controls loop src="low.wav"></audio>
+<script>
+  const player = document.querySelector('audio');
+  const high = new URLSearchParams(location.search).get('tone') === '6000';
+  if (high) player.src = 'high.wav';
+  player.volume = 0.35;
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: high ? 'Rifflo Edge 6000 Hz' : 'Rifflo Edge 200 Hz',
+    artist: 'Dedicated Edge verification profile',
+  });
+  navigator.mediaSession.setActionHandler('play', () => player.play());
+  navigator.mediaSession.setActionHandler('pause', () => player.pause());
+  player.addEventListener('play', () => { navigator.mediaSession.playbackState = 'playing'; });
+  player.addEventListener('pause', () => { navigator.mediaSession.playbackState = 'paused'; });
+  player.play().catch(error => { document.body.dataset.playError = error.message; });
+</script>
+</html>

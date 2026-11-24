@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/Rifflo/Audio/AudioSourceMatcher.cs" Link="AudioSourceMatcher.cs" />
+    <Compile Include="../../src/Rifflo/Audio/ProcessSnapshot.cs" Link="ProcessSnapshot.cs" />
+    <Compile Include="../../src/Rifflo/Audio/WindowsAppRegistration.cs" Link="WindowsAppRegistration.cs" />
+    <Compile Include="../../src/Rifflo/Audio/KuGouExecutableTrust.cs" Link="KuGouExecutableTrust.cs" />
+    <Compile Include="../../src/Rifflo/Audio/SignedPeProduct.cs" Link="SignedPeProduct.cs" />
+  </ItemGroup>
+</Project>

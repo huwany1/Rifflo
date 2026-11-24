@@ -1,0 +1,164 @@
+<Window x:Class="Rifflo.Settings.SettingsWindow"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:settings="clr-namespace:Rifflo.Settings"
+        Title="Rifflo 设置" Width="510" Height="650" MinWidth="375" MinHeight="300"
+        Icon="pack://application:,,,/Assets/Rifflo.ico"
+        WindowStartupLocation="CenterScreen" Background="#F4F7FC" Foreground="#1A2940"
+        FontFamily="Microsoft YaHei UI, Segoe UI" FontSize="13" UseLayoutRounding="True">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="11,5" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Foreground" Value="#244779" />
+            <Setter Property="Background" Value="#F5F8FE" />
+            <Setter Property="BorderBrush" Value="#C5D3E8" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#1A2940" />
+            <Setter Property="Margin" Value="0,5,0,8" />
+        </Style>
+        <Style TargetType="Slider">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="IsSnapToTickEnabled" Value="True" />
+            <Setter Property="SmallChange" Value="1" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="MinHeight" Value="28" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="Section" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#DCE5F1" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="9" />
+            <Setter Property="Padding" Value="15,12" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,5,9,5" />
+        </Style>
+        <Style x:Key="Value" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#486080" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="Heading" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <Border DockPanel.Dock="Top" Background="#E7EFFB" Padding="22,15">
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition /></Grid.ColumnDefinitions>
+                <TextBlock Text="Rifflo" FontFamily="Segoe UI" FontSize="25" FontWeight="SemiBold" VerticalAlignment="Center" />
+                <TextBlock x:Name="PlaybackStatus" AutomationProperties.AutomationId="PlaybackStatus"
+                           Grid.Column="1" Margin="16,0,0,0" TextWrapping="Wrap"
+                           Foreground="#35517A" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Padding="20,8" BorderBrush="#DCE5F1" BorderThickness="0,1,0,0">
+            <DockPanel>
+                <Button x:Name="ResetDefaults" AutomationProperties.AutomationId="ResetDefaults" Content="恢复默认设置" DockPanel.Dock="Right" Click="ResetDefaults_Click" Margin="0" />
+                <TextBlock x:Name="SaveStatus" Foreground="#526984" VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+        <ScrollViewer AutomationProperties.AutomationId="SettingsOptions"
+                      VerticalScrollBarVisibility="Auto" Padding="20,14,20,4">
+            <StackPanel>
+                <Border Style="{StaticResource Section}">
+                    <StackPanel>
+                        <CheckBox x:Name="BroadcastCaptureOption" AutomationProperties.AutomationId="BroadcastCaptureEnabled"
+                                  Content="直播捕获模式" Checked="BroadcastCaptureChanged" Unchecked="BroadcastCaptureChanged" />
+                        <TextBlock Text="开启后，在抖音直播伴侣的“窗口捕获”中选择“Rifflo 桌面悬浮窗”。"
+                                   Foreground="#486080" TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Section}">
+                    <StackPanel>
+                        <TextBlock Text="布局与文字" Style="{StaticResource Heading}" />
+                        <CheckBox x:Name="ShowArtist" AutomationProperties.AutomationId="ShowArtist" Content="显示歌手" Checked="OptionsChanged" Unchecked="OptionsChanged" />
+                        <CheckBox x:Name="Animation60Fps" AutomationProperties.AutomationId="Animation60Fps"
+                                  Content="启用 60 帧动画" Checked="AnimationFrameRateChanged" Unchecked="AnimationFrameRateChanged" />
+                        <Grid>
+                            <Grid.RowDefinitions><RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition /></Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="106" /><ColumnDefinition /><ColumnDefinition Width="57" /></Grid.ColumnDefinitions>
+                            <TextBlock Text="悬浮窗布局" Style="{StaticResource Label}" />
+                            <ComboBox x:Name="LayoutOption" AutomationProperties.Name="悬浮窗布局" AutomationProperties.AutomationId="Layout"
+                                      Grid.Column="1" Grid.ColumnSpan="2" SelectedValuePath="Tag" SelectionChanged="OptionsChanged" Margin="0,0,0,6">
+                                <ComboBoxItem Tag="{x:Static settings:OverlayLayout.SpectrumAbove}" Content="上频谱、下歌名" />
+                                <ComboBoxItem Tag="{x:Static settings:OverlayLayout.CaptionAbove}" Content="上歌名、下频谱" />
+                                <ComboBoxItem Tag="{x:Static settings:OverlayLayout.CaptionLeft}" Content="左歌名、右频谱" />
+                                <ComboBoxItem Tag="{x:Static settings:OverlayLayout.SpectrumLeft}" Content="左频谱、右歌名" />
+                            </ComboBox>
+                            <TextBlock Text="文字显示宽度" Grid.Row="1" Style="{StaticResource Label}" />
+                            <Slider x:Name="TextWidthSlider" AutomationProperties.Name="文字显示宽度（DIP）" AutomationProperties.AutomationId="TextWidth"
+                                    Grid.Row="1" Grid.Column="1" Minimum="{x:Static settings:AppSettings.MinimumTextWidth}" Maximum="{x:Static settings:AppSettings.MaximumTextWidth}"
+                                    TickFrequency="1" LargeChange="20" ValueChanged="OptionsChanged" />
+                            <TextBlock x:Name="TextWidthValue" Grid.Row="1" Grid.Column="2" Style="{StaticResource Value}" />
+                            <TextBlock Text="长文本滚动方式" Grid.Row="2" Style="{StaticResource Label}" />
+                            <ComboBox x:Name="ScrollModeOption" AutomationProperties.Name="长文本滚动方式" AutomationProperties.AutomationId="ScrollMode"
+                                      Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" SelectedValuePath="Tag" SelectionChanged="OptionsChanged" Margin="0,6,0,6">
+                                <ComboBoxItem Tag="{x:Static settings:CaptionScrollMode.Loop}" Content="单向循环" />
+                                <ComboBoxItem Tag="{x:Static settings:CaptionScrollMode.Bounce}" Content="左右往返" />
+                            </ComboBox>
+                            <TextBlock Text="字号" Grid.Row="3" Style="{StaticResource Label}" />
+                            <Slider x:Name="FontSizeSlider" AutomationProperties.Name="字号" AutomationProperties.AutomationId="FontSize"
+                                    Grid.Row="3" Grid.Column="1" Minimum="12" Maximum="36" TickFrequency="1" ValueChanged="OptionsChanged" />
+                            <TextBlock x:Name="FontSizeValue" Grid.Row="3" Grid.Column="2" Style="{StaticResource Value}" />
+                            <TextBlock Text="不透明度" Grid.Row="4" Style="{StaticResource Label}" />
+                            <Slider x:Name="OpacitySlider" AutomationProperties.Name="不透明度" AutomationProperties.AutomationId="Opacity"
+                                    Grid.Row="4" Grid.Column="1" Minimum="20" Maximum="100" TickFrequency="1" ValueChanged="OptionsChanged" />
+                            <TextBlock x:Name="OpacityValue" Grid.Row="4" Grid.Column="2" Style="{StaticResource Value}" />
+                            <TextBlock Text="文字颜色" Grid.Row="5" Style="{StaticResource Label}" />
+                            <Button x:Name="TextColorButton" AutomationProperties.Name="文字颜色" AutomationProperties.AutomationId="TextColor"
+                                    Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Click="ChooseTextColor" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Section}">
+                    <StackPanel>
+                        <TextBlock Text="频谱" Style="{StaticResource Heading}" />
+                        <CheckBox x:Name="SpectrumEnabled" AutomationProperties.AutomationId="SpectrumEnabled" Content="显示频谱" Checked="OptionsChanged" Unchecked="OptionsChanged" />
+                        <CheckBox x:Name="LiveCaptureEnabled" AutomationProperties.AutomationId="LiveCaptureEnabled" Content="采集实时频谱" Checked="OptionsChanged" Unchecked="OptionsChanged" />
+                        <Grid x:Name="SpectrumOptions">
+                            <Grid.RowDefinitions><RowDefinition /><RowDefinition /><RowDefinition /></Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="80" /><ColumnDefinition /><ColumnDefinition Width="51" /></Grid.ColumnDefinitions>
+                            <TextBlock Text="柱数" Style="{StaticResource Label}" />
+                            <Slider x:Name="BarCountSlider" AutomationProperties.Name="柱数" AutomationProperties.AutomationId="BarCount"
+                                    Grid.Column="1" Minimum="8" Maximum="32" TickFrequency="1" ValueChanged="OptionsChanged" />
+                            <TextBlock x:Name="BarCountValue" Grid.Column="2" Style="{StaticResource Value}" />
+                            <TextBlock Text="灵敏度" Grid.Row="1" Style="{StaticResource Label}" />
+                            <Slider x:Name="SensitivitySlider" AutomationProperties.Name="灵敏度" AutomationProperties.AutomationId="Sensitivity"
+                                    Grid.Row="1" Grid.Column="1" Minimum="0.25" Maximum="3" TickFrequency="0.05" SmallChange="0.05" ValueChanged="OptionsChanged" />
+                            <TextBlock x:Name="SensitivityValue" Grid.Row="1" Grid.Column="2" Style="{StaticResource Value}" />
+                            <TextBlock Text="频谱颜色" Grid.Row="2" Style="{StaticResource Label}" />
+                            <Button x:Name="BarColorButton" AutomationProperties.Name="频谱颜色" AutomationProperties.AutomationId="BarColor"
+                                    Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Click="ChooseBarColor" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Section}">
+                    <StackPanel>
+                        <TextBlock Text="位置与播放器" Style="{StaticResource Heading}" />
+                        <CheckBox x:Name="PositionLockedOption" AutomationProperties.AutomationId="PositionLocked" Content="锁定位置并点击穿透" Checked="OptionsChanged" Unchecked="OptionsChanged" />
+                        <CheckBox x:Name="TopmostOption" AutomationProperties.AutomationId="Topmost" Content="悬浮窗置顶" Checked="OptionsChanged" Unchecked="OptionsChanged" />
+                        <Button x:Name="DefaultPosition" AutomationProperties.AutomationId="DefaultPosition" Content="回到左下角"
+                                HorizontalAlignment="Left" Margin="0,1,0,10" Click="DefaultPosition_Click" />
+                        <DockPanel LastChildFill="True">
+                            <TextBlock Text="优先播放器" Style="{StaticResource Label}" DockPanel.Dock="Left" />
+                            <ComboBox x:Name="PreferredSource" AutomationProperties.Name="优先播放器" AutomationProperties.AutomationId="PreferredSource"
+                                      DisplayMemberPath="Name" SelectedValuePath="Id" SelectionChanged="OptionsChanged" />
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

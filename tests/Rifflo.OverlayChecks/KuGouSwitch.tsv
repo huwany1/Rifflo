@@ -1,0 +1,9 @@
+737.7	resume	Rifflo.selection	kugou Playing title=Melancholy eligible=True
+2472.2	next	Rifflo.selection	kugou Playing title=萤火之森 eligible=True
+2479.5	next	Rifflo.selection	kugou Stopped title=萤火之森 eligible=False
+2493.0	next	Rifflo.selection	kugou None title=萤火之森 eligible=False
+2553.6	next	Rifflo.selection	kugou Playing title=萤火之森 eligible=True
+3902.7	previous	Rifflo.selection	kugou Playing title=Melancholy eligible=True
+3909.9	previous	Rifflo.selection	kugou Stopped title=Melancholy eligible=False
+3921.8	previous	Rifflo.selection	kugou None title=Melancholy eligible=False
+3978.2	previous	Rifflo.selection	kugou Playing title=Melancholy eligible=True

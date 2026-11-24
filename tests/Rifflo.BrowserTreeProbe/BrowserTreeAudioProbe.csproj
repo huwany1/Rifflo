@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NAudio.Core" HintPath="$(RiffloPublishDirectory)\NAudio.Core.dll" />
+    <Reference Include="NAudio.Wasapi" HintPath="$(RiffloPublishDirectory)\NAudio.Wasapi.dll" />
+  </ItemGroup>
+</Project>

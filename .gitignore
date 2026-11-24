@@ -1,0 +1,10 @@
+/.tools/
+/.dotnet/
+/artifacts/
+/docs/*验收*.md
+.vs/
+**/bin/
+**/obj/
+TestResults/
+*.user
+*.suo
