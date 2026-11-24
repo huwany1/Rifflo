@@ -6,32 +6,11 @@ Rifflo 是 Windows 11 x64 上的透明歌曲悬浮窗。播放音乐时，歌名
 
 ## 快速开始
 
-当前版本 **0.1.2** 从源码构建。在 Windows 11 x64 上解压源码，进入包含 `global.json` 的目录并打开 PowerShell。构建需要 **.NET SDK 10.0.404**，可用 `dotnet --version` 核对。[下载源码 ZIP](https://github.com/huwany1/Rifflo/archive/refs/heads/main.zip)
+1. 下载 Windows 11 x64 便携包。[下载 Rifflo 0.1.2 ZIP](https://github.com/huwany1/Rifflo/releases/download/v0.1.2/Rifflo-0.1.2-win-x64.zip)
+2. 将 ZIP 解压到一个文件夹，双击其中的 `Rifflo.exe`。程序自带 .NET 桌面运行时，可直接启动。
+3. 在播放器里播放一首歌，悬浮窗默认出现在主屏左下角。双击系统托盘里的 Rifflo 图标可打开设置，即使没有播放音乐，也能预览外观。
 
-<details>
-<summary>安装项目指定的 .NET SDK</summary>
-
-以下命令把 SDK 安装到项目的 `.tools` 目录，并在当前 PowerShell 窗口中启用它。[微软安装脚本文档](https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-install-script)
-
-```powershell
-New-Item -ItemType Directory -Force .tools | Out-Null
-Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile '.tools\dotnet-install.ps1'
-powershell -NoProfile -ExecutionPolicy Bypass -File '.tools\dotnet-install.ps1' -Version 10.0.404 -Architecture x64 -InstallDir '.tools\dotnet' -NoPath
-$env:Path = "$PWD\.tools\dotnet;$env:Path"
-dotnet --version
-```
-
-</details>
-
-**构建应用。** 在同一个 PowerShell 窗口运行以下命令。
-
-```powershell
-$project = '.\src\Rifflo\Rifflo.csproj'
-dotnet restore $project -r win-x64 -p:SelfContained=true --locked-mode
-dotnet publish $project -c Release -r win-x64 --self-contained true --no-restore -o .\artifacts\publish\win-x64
-```
-
-**开始播放。** 双击 `artifacts\publish\win-x64\Rifflo.exe`，然后在播放器里播放一首歌。悬浮窗默认出现在主屏左下角。双击系统托盘里的 Rifflo 图标可打开设置，即使没有播放音乐，也能用样例预览外观。发布目录已包含运行时，复制到其他 Windows 11 x64 电脑时请保留整个目录。
+其他版本和文件校验值可在 [GitHub Releases](https://github.com/huwany1/Rifflo/releases) 查看。
 
 ## 调整悬浮窗
 
@@ -58,6 +37,37 @@ Rifflo 从 Windows 系统媒体会话读取歌曲信息。播放器需要向系�
 ## 开发与测试
 
 应用使用 C#、WPF 和 NAudio。[应用源码](src/Rifflo) · [测试项目](tests) · [桌面验证脚本](scripts)
+
+### 从源码构建
+
+在 Windows 11 x64 上，进入包含 `global.json` 的仓库根目录并打开 PowerShell。构建需要 **.NET SDK 10.0.404**，可用 `dotnet --version` 核对。
+
+<details>
+<summary>安装项目指定的 .NET SDK</summary>
+
+以下命令把 SDK 安装到项目的 `.tools` 目录，并在当前 PowerShell 窗口中启用它。[微软安装脚本文档](https://learn.microsoft.com/zh-cn/dotnet/core/tools/dotnet-install-script)
+
+```powershell
+New-Item -ItemType Directory -Force .tools | Out-Null
+Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile '.tools\dotnet-install.ps1'
+powershell -NoProfile -ExecutionPolicy Bypass -File '.tools\dotnet-install.ps1' -Version 10.0.404 -Architecture x64 -InstallDir '.tools\dotnet' -NoPath
+$env:Path = "$PWD\.tools\dotnet;$env:Path"
+dotnet --version
+```
+
+</details>
+
+**构建应用。** 在同一个 PowerShell 窗口运行以下命令。
+
+```powershell
+$project = '.\src\Rifflo\Rifflo.csproj'
+dotnet restore $project -r win-x64 -p:SelfContained=true --locked-mode
+dotnet publish $project -c Release -r win-x64 --self-contained true --no-restore -o .\artifacts\publish\win-x64
+```
+
+完成后可运行 `artifacts\publish\win-x64\Rifflo.exe`。
+
+### 运行检查
 
 在仓库根目录运行以下检查，分别验证播放器选择与音频处理、窗口定位、悬浮窗布局与滚动。
 
