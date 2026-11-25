@@ -7,7 +7,7 @@ Rifflo 是 Windows 11 x64 上的透明歌曲悬浮窗。播放音乐时，歌名
 ## 快速开始
 
 1. 下载 Windows 11 x64 便携包。[下载 Rifflo 0.1.2 ZIP](https://github.com/huwany1/Rifflo/releases/download/v0.1.2/Rifflo-0.1.2-win-x64.zip)
-2. 将 ZIP 解压到一个文件夹，双击其中的 `Rifflo.exe`。程序自带 .NET 桌面运行时，可直接启动。
+2. 选择“解压到当前文件夹”，解压工具会自动创建 `Rifflo-0.1.2-win-x64` 文件夹。打开它，双击 `Rifflo.exe` 即可启动。程序自带 .NET 桌面运行时。
 3. 在播放器里播放一首歌，悬浮窗默认出现在主屏左下角。双击系统托盘里的 Rifflo 图标可打开设置，即使没有播放音乐，也能预览外观。
 
 其他版本和文件校验值可在 [GitHub Releases](https://github.com/huwany1/Rifflo/releases) 查看。
